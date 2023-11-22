@@ -1,6 +1,6 @@
 const express = require('express');
 
-//importamos el fichero con los datos que necesita nuestro Router
+
 const {todos} = require('../data/index');
 
 
@@ -15,11 +15,24 @@ tener 3 routers diferentes: userRouter, todoRouter y categoryRouter.
 
 const todoRouter = express.Router();
 
+todoRouter.get('/', (req, res)=>{
+  
+})
+
 todoRouter.get('/todo', (req, res) => {
   //devolver todos los "todos" que hay en el array con formato JSON.
+
+   res.json(todos)
+
+
 });
 
 todoRouter.post('/todo', (req, res) => {
+  let nuevaTarea = req.body;
+  console.log(req.body)
+  todos.push(nuevaTarea)
+  nuevaTarea.id = todos.length - 1
+  res.json(todos)
   
   //crear un nuevo objeto con estructura {id, text, fecha, done} con los datos que vienen en el BODY de la Request y meterlos dentro de el array.
   //el nuevo objeto debe tener como id un numero mas que el numero actual de elementos guardados en el array.
@@ -40,6 +53,12 @@ Si con Insomnia o Postman hicisemos una peticion GET a la ruta /todo/12, está s
 
 */
 todoRouter.get('/todo/:id',  (req, res) => {
+  let id = req.params.id
+  let index = todos.findIndex(element => element.id == id)
+
+  if (index == -1) return res.status(404).send('Sorry, we cannot find the task')
+
+  res.json(todos[index])
 
   //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
   //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
@@ -54,6 +73,22 @@ todoRouter.get('/todo/:id',  (req, res) => {
 // MISSING '/todo/:id' PATCH
 
 todoRouter.patch('/todo/:id',  (req, res) => {
+  
+  let updates = req.body;
+  let id = req.params.id;
+  let index = todos.findIndex(element => element.id == id);
+
+  if(index == -1) return res.status(404).send('Sorry, we cannot find the task')
+
+  Object.assign(todos[index], updates)
+
+
+  res.status(200).json(todos[index])
+  
+  
+  
+  
+  
   //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
   //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
   
@@ -68,6 +103,19 @@ todoRouter.patch('/todo/:id',  (req, res) => {
 
 
 todoRouter.delete('/todo/:id',  (req, res) => {
+  
+  let id = req.params.id;
+  let index = todos.findIndex(element => element.id == id);
+
+  if(index == -1) return res.status(404).send('Sorry, we cannot find the task that you want to delete');
+
+  todos.splice(+index, 1);
+
+  res.json(todos)
+
+  
+  
+  
   //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
   //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
   
