@@ -17,7 +17,7 @@ exports.todos = [{
   "id": 4,
   "text": "Studying",
   "done": false
-}
+},
 {
   "id": 5,
   "text": "Reading",
