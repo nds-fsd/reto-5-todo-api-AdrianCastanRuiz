@@ -1,22 +1,22 @@
 exports.todos = [{
   "id": 1,
-  "text": "Hacer la cama",
+  "text": "Work out",
   "done": false
 },
 {
   "id": 2,
-  "text": "Hacer la compra",
-  "done": true
+  "text": "Go shopping",
+  "done": false
 },
 {
   "id": 3,
-  "text": "Limpiar la casa",
-  "done": true
+  "text": "Cleaning",
+  "done": false
 },
 {
   "id": 4,
-  "text": "Estudiar programación",
-  "done": true
+  "text": "Studying",
+  "done": false
 }
 ];
 

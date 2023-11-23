@@ -31,7 +31,7 @@ todoRouter.post('/todo', (req, res) => {
   let nuevaTarea = req.body;
   console.log(req.body)
   todos.push(nuevaTarea)
-  nuevaTarea.id = todos.length - 1
+  nuevaTarea.id = todos.length 
   res.json(todos)
   
   //crear un nuevo objeto con estructura {id, text, fecha, done} con los datos que vienen en el BODY de la Request y meterlos dentro de el array.
@@ -83,7 +83,7 @@ todoRouter.patch('/todo/:id',  (req, res) => {
   Object.assign(todos[index], updates)
 
 
-  res.status(200).json(todos[index])
+  res.json(todos)
   
   
   
@@ -129,3 +129,5 @@ todoRouter.delete('/todo/:id',  (req, res) => {
 
 //exportamos el router para poder 'usarlo' en nuestra app.
 module.exports = todoRouter;
+
+

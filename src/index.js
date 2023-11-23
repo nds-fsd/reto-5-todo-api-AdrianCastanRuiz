@@ -6,6 +6,8 @@ const cors = require('cors')
 app.use(cors())
 
 
+
+
 //Le decimos a nuestra app, que vamos recibir peticiones donde el Body contiene texto en formato JSON.
 app.use(express.json());
 
