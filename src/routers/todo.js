@@ -111,7 +111,7 @@ todoRouter.delete('/todo/:id',  (req, res) => {
 
   todos.splice(+index, 1);
 
-  res.json(todos)
+  res.send(todos)
 
   
   
